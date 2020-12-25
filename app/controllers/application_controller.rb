@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  #このApplicationcontrollerは全てのコントローラで継承されてるから、このコントローラ内に書いたことは、全ての
+  #コントローラで適用される
   
   include SessionsHelper
   #Helper に定義していた logged_in? を下で使用してるけど、Controller から Helper のメソッドを使うことはデフォルトではできないから、
@@ -8,5 +10,9 @@ class ApplicationController < ActionController::Base
     unless logged_in?
       redirect_to login_url
     end
+  end
+  
+  def counts(user)
+    @count_microposts = user.microposts.count
   end
 end
